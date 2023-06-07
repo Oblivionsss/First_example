@@ -1,7 +1,7 @@
 import datetime as dt
         
 class Record:
-    def __init__(self,amount, date, comment):
+    def __init__(self, amount, comment, date):
         self.amount = amount
         self.date = date
         self.comment = comment
@@ -10,14 +10,18 @@ class Record:
 class Calculator:
     def __init__(self, limit):
         self.limit = limit
-        self.records = []     
+        self.records = []
+
+    def add_record(self, records) :
+        print(f"Запись от {records.date} с комментарием '{records.comment}' доабавлена!")     
         
+
 # создадим калькулятор денег с дневным лимитом 1000
-# cash_calculator = CashCalculator(1000)
+cash_calculator = Calculator(1000)
         
 # дата в параметрах не указана, 
 # так что по умолчанию к записи должна автоматически добавиться сегодняшняя дата
-# cash_calculator.add_record(Record(amount=145, comment="кофе")) 
+cash_calculator.add_record(Record(amount=145, comment="кофе", date="08.11.2019")) 
 # и к этой записи тоже дата должна добавиться автоматически
 # cash_calculator.add_record(Record(amount=300, comment="Серёге за обед"))
 # а тут пользователь указал дату, сохраняем её
