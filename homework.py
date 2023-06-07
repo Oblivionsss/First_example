@@ -13,15 +13,19 @@ class Calculator:
         self.records = []
 
     def add_record(self, records) :
-        print(f"Запись от {records.date} с комментарием '{records.comment}' доабавлена!")     
-        
+        # print(f"Запись от {records.date} с комментарием '{records.comment}' доабавлена!")     
+        self.records.append([records.amount, records.comment, records.date])
 
 # создадим калькулятор денег с дневным лимитом 1000
 cash_calculator = Calculator(1000)
         
 # дата в параметрах не указана, 
 # так что по умолчанию к записи должна автоматически добавиться сегодняшняя дата
-cash_calculator.add_record(Record(amount=145, comment="кофе", date="08.11.2019")) 
+cash_calculator.add_record(Record(amount=145, comment="кофе", date="08.11.2019"))
+cash_calculator.add_record(Record(amount=145, comment="булка", date="08.11.2019"))
+cash_calculator.add_record(Record(amount=145, comment="пятерочка", date="08.11.2019"))
+cash_calculator.add_record(Record(amount=145, comment="магазин", date="09.11.2019"))
+print(cash_calculator.records)
 # и к этой записи тоже дата должна добавиться автоматически
 # cash_calculator.add_record(Record(amount=300, comment="Серёге за обед"))
 # а тут пользователь указал дату, сохраняем её
