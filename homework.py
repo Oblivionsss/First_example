@@ -13,9 +13,17 @@ class Calculator:
         self.records = []
 
     def add_record(self, records) :
-        # print(f"Запись от {records.date} с комментарием '{records.comment}' доабавлена!")     
+        """
+        Функция записи данных
+        amount - стоимость / калории
+        comment - комментарий
+        (date) - дата (сегодня)
+        """     
         self.records.append([records.amount, records.comment, records.date])
 
+    def get_today_stats(self):
+        
+        
 # создадим калькулятор денег с дневным лимитом 1000
 cash_calculator = Calculator(1000)
         
