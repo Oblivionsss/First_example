@@ -11,6 +11,7 @@ class Calculator:
     def __init__(self, limit):
         self.limit = limit
         self.records = []
+        self.format = "%d.%m.%Y"
 
     def add_record(self, records) :
         """
@@ -21,19 +22,26 @@ class Calculator:
         """     
         self.records.append([records.amount, records.comment, records.date])
 
+ 
     def get_today_stats(self):
-        
-        
+        today = dt.datetime.today().date()
+
+        return sum([i[0] 
+                for i in self.records 
+                if dt.datetime.strptime(i[2], self.format).date() == today])
+
+
 # создадим калькулятор денег с дневным лимитом 1000
 cash_calculator = Calculator(1000)
         
 # дата в параметрах не указана, 
 # так что по умолчанию к записи должна автоматически добавиться сегодняшняя дата
-cash_calculator.add_record(Record(amount=145, comment="кофе", date="08.11.2019"))
-cash_calculator.add_record(Record(amount=145, comment="булка", date="08.11.2019"))
-cash_calculator.add_record(Record(amount=145, comment="пятерочка", date="08.11.2019"))
-cash_calculator.add_record(Record(amount=145, comment="магазин", date="09.11.2019"))
+cash_calculator.add_record(Record(amount=100, comment="кофе", date="08.06.2023"))
+cash_calculator.add_record(Record(amount=111, comment="булка", date="08.06.2023"))
+cash_calculator.add_record(Record(amount=111, comment="пятерочка", date="08.06.2023"))
+cash_calculator.add_record(Record(amount=120, comment="магазин", date="09.06.2023"))
 print(cash_calculator.records)
+print(cash_calculator.get_today_stats())
 # и к этой записи тоже дата должна добавиться автоматически
 # cash_calculator.add_record(Record(amount=300, comment="Серёге за обед"))
 # а тут пользователь указал дату, сохраняем её
