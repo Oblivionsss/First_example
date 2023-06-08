@@ -24,11 +24,25 @@ class Calculator:
 
  
     def get_today_stats(self):
+        """
+        Функция возвращает сумму калорий / денег
+        потраченных за сегодняшний день
+        today = дата на сегодня
+        """
         today = dt.datetime.today().date()
-
         return sum([i[0] 
                 for i in self.records 
                 if dt.datetime.strptime(i[2], self.format).date() == today])
+
+
+class CashCalculator(Calculator):
+    def get_today_cash_remained():
+        pass
+
+
+class CaloriesCalculator(Calculator):
+    def get_calories_remained():
+        pass
 
 
 # создадим калькулятор денег с дневным лимитом 1000
