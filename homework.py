@@ -54,9 +54,27 @@ class Calculator:
 
 
 class CashCalculator(Calculator):
-    def get_today_cash_remained():
-        pass
+    USD_RATE = 70
+    EURO_RATE = 80
+    RUB_RATE = 1
 
+    def get_today_cash_remained(self, currency):
+        all_currency = {
+            'rub': (self.RUB_RATE, 'руб'),
+            'usd': (self.USD_RATE, 'USD'),
+            'eur': (self.EURO_RATE, 'Euro'),
+        }
+
+        today_remained = self.get_today_stats()
+        remained = round ((self.limit - today_remained) / all_currency[currency][0], 2)
+        abs_remained = abs(remained)
+        if remained == 0:
+            print("Денег нет, держись")
+        elif remained > 0:
+            print(f"На сегодня осталось {remained} {all_currency[currency][1]}")
+        else:
+            print(f"Денег нет, держись: твой долг - "
+                  f"{abs_remained} {all_currency[currency][1]}")
 
 class CaloriesCalculator(Calculator):
     def get_calories_remained(self):
@@ -70,7 +88,7 @@ class CaloriesCalculator(Calculator):
 
 
 # создадим калькулятор денег с дневным лимитом 1000
-cash_calculator = CaloriesCalculator(1000)
+cash_calculator = CashCalculator(1000)
         
 # дата в параметрах не указана, 
 # так что по умолчанию к записи должна автоматически добавиться сегодняшняя дата
@@ -79,12 +97,12 @@ cash_calculator.add_record(Record(amount=111, comment="булка", date="08.06.
 cash_calculator.add_record(Record(amount=111, comment="пятерочка", date="08.06.2023"))
 cash_calculator.add_record(Record(amount=120, comment="магазин", date="02.06.2023"))
 cash_calculator.add_record(Record(amount=120, comment="магазин", date="30.05.2023"))
-cash_calculator.add_record(Record(amount=120, comment="магазин", date="09.06.2023"))
-cash_calculator.add_record(Record(amount=120, comment="магазин", date="09.06.2023"))
+cash_calculator.add_record(Record(amount=900, comment="магазин", date="09.06.2023"))
+cash_calculator.add_record(Record(amount=101, comment="магазин", date="09.06.2023"))
 print(cash_calculator.records)
 print(cash_calculator.get_today_stats())
 print(cash_calculator.get_week_stats())
-cash_calculator.get_calories_remained()
+cash_calculator.get_today_cash_remained('usd')
 # и к этой записи тоже дата должна добавиться автоматически
 # cash_calculator.add_record(Record(amount=300, comment="Серёге за обед"))
 # а тут пользователь указал дату, сохраняем её
